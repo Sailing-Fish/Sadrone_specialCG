@@ -3,58 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polonia OS | Classified Archive</title>
+    <title>普隆尼亚系统 | 绝密档案</title>
     <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+SC:wght@300;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 背景噪音纹理 -->
+    <!-- 屏幕噪点与扫描线特效 -->
     <div class="noise"></div>
-    <!-- 扫描线 -->
     <div class="scanline"></div>
 
-    <!-- HUD: 侧边状态栏 -->
+    <!-- 侧边状态栏 (HUD) -->
     <div class="hud-sidebar">
         <div class="hud-item">
-            <span class="label">CORE TEMP</span>
+            <span class="label">核心温度</span>
             <span class="value blink-red">98.6°C</span>
         </div>
         <div class="hud-item">
-            <span class="label">HEART RATE</span>
+            <span class="label">心率监测</span>
             <span class="value">120 BPM</span>
         </div>
         <div class="hud-item">
-            <span class="label">SYNC RATE</span>
-            <span class="value color-gold">MAXIMUM</span>
+            <span class="label">同步率</span>
+            <span class="value color-gold">极佳 (MAX)</span>
         </div>
         <div class="hud-item">
-            <span class="label">DATE</span>
-            <span class="value">UNKNOWN</span>
+            <span class="label">当前状态</span>
+            <span class="value">维护中...</span>
         </div>
     </div>
 
     <div class="container">
-        <!-- 序幕 -->
+        <!-- 序幕：加载界面 -->
         <div class="intro-screen">
-            <div class="logo">FATUI <span class="highlight">DATABASE</span></div>
-            <h1 class="glitch" data-text="PRIVATE EVENT: 07">PRIVATE EVENT: 07</h1>
-            <p class="typewriter">> Decrypting biometric data...</p>
-            <p class="typewriter delay-1">> Access Level: Harbinger (Authorized)</p>
+            <div class="logo">愚人众 <span class="highlight">机密档案</span></div>
+            <h1 class="glitch" data-text="特别事件：核心维护">特别事件：核心维护</h1>
+            <p class="typewriter">> 正在解密生物体征数据...</p>
+            <p class="typewriter delay-1">> 访问权限：执行官级 (已授权)</p>
             <div class="scroll-indicator">
-                <span>SCROLL TO INITIATE</span>
+                <span>下滑开始维护</span>
                 <div class="arrow">↓</div>
             </div>
         </div>
 
         <!-- 场景一：初入 (坐姿) -->
         <section class="scene" id="scene-1">
-            <div class="status-overlay">STATUS: WAITING_FOR_INPUT</div>
+            <div class="status-overlay">状态: 等待指令</div>
             <div class="img-frame">
+                <!-- 坐姿图 -->
                 <img src="https://s3.bmp.ovh/imgs/2026/01/06/94267599b85279cc.png" alt="Phase 1">
                 <div class="vignette"></div>
             </div>
             <div class="dialogue-box">
-                <div class="name-tag">桑多涅 (Sandrone)</div>
+                <div class="name-tag">桑多涅</div>
                 <div class="text">
                     <p>“咔哒...（门锁自动闭合的声音）”</p>
                     <p>“你来了，小白鼠。普隆尼亚已经被我强制关机了。”</p>
@@ -63,39 +62,39 @@
             </div>
         </section>
 
-        <!-- 场景二：卸甲 (脱鞋/抬腿) -->
+        <!-- 场景二：卸甲 (脱袜/腿部) -->
         <section class="scene" id="scene-2">
-            <div class="status-overlay">STATUS: DISENGAGING_ARMOR</div>
+            <div class="status-overlay">状态: 卸除装甲</div>
             <div class="img-frame">
+                <!-- 腿部图 -->
                 <img src="https://s3.bmp.ovh/imgs/2026/01/06/3dbf5ca39ce5073f.png" alt="Phase 2">
                 <div class="vignette"></div>
             </div>
             <div class="dialogue-box">
-                <div class="name-tag">桑多涅 (Sandrone)</div>
+                <div class="name-tag">桑多涅</div>
                 <div class="text">
-                    <p>“别傻站着，帮我把鞋子脱了。”</p>
+                    <p>“别傻站着，帮我把鞋袜脱了。”</p>
                     <p>“...你的手在抖什么？这只是拆卸外部装甲的标准流程。”</p>
                     <p>“这双腿的传动轴承有些干涩了...呵，别用那种眼神看我。这是为了维护，不是为了让你像个变态一样盯着看的。”</p>
                 </div>
             </div>
         </section>
 
-        <!-- 场景三：核心暴露 (泳装/散热) -->
+        <!-- 场景三：核心暴露 (泳装 - 设置为散热幻象) -->
         <section class="scene" id="scene-3">
-            <!-- 增加红色警报覆盖层 -->
-            <div class="status-overlay alert">WARNING: CORE OVERHEAT // VISUAL ERROR</div>
+            <div class="status-overlay alert">警告: 核心过热 // 视觉模块错误</div>
             <div class="img-frame glitch-container">
-                <!-- 修正：这里放泳装图 -->
-                <img src="https://s3.bmp.ovh/imgs/2026/01/06/fa8afe63adf4a2a8.png" alt="Phase 3" class="glitch-img">
+                <!-- 泳装图 -->
+                <img src="https://s3.bmp.ovh/imgs/2026/01/06/3e3d8517a2638423.png" alt="Phase 3" class="glitch-img">
                 <div class="vignette"></div>
             </div>
             <div class="dialogue-box special">
-                <div class="name-tag system">SYSTEM ALERT</div>
+                <div class="name-tag system">系统警告</div>
                 <div class="text system-text">
                     <p>> 警告：核心温度突破阈值。</p>
-                    <p>> 视觉模块受热浪干扰... 正在投射【海滩散热模拟场景】。</p>
+                    <p>> 视觉模块受热浪干扰... 正在投射【夏日散热模拟场景】。</p>
                 </div>
-                <div class="name-tag" style="margin-top:20px; background:var(--gold);">桑多涅 (Sandrone)</div>
+                <div class="name-tag" style="margin-top:20px; background:#d4af37; color:#000;">桑多涅</div>
                 <div class="text">
                     <p>“呼... 这样就凉快多了...”</p>
                     <p>“在这个模式下，没有厚重的礼服，也没有愚人众的责任。”</p>
@@ -106,14 +105,14 @@
 
         <!-- 场景四：休眠 (睡着) -->
         <section class="scene" id="scene-4">
-            <div class="status-overlay">STATUS: STANDBY_MODE</div>
+            <div class="status-overlay">状态: 进入待机</div>
             <div class="img-frame">
-                <!-- 修正：这里放睡觉图 -->
-                <img src="https://s3.bmp.ovh/imgs/2026/01/06/3e3d8517a2638423.png" alt="Phase 4">
+                <!-- 睡觉图 -->
+                <img src="https://s3.bmp.ovh/imgs/2026/01/06/fa8afe63adf4a2a8.png" alt="Phase 4">
                 <div class="vignette"></div>
             </div>
             <div class="dialogue-box">
-                <div class="name-tag">桑多涅 (Sandrone)</div>
+                <div class="name-tag">桑多涅</div>
                 <div class="text">
                     <p>“嗯... 温度... 稳定了...”</p>
                     <p>“别走... 就在这里待着... 帮我看着数据...”</p>
@@ -125,11 +124,27 @@
 
         <!-- 结尾 -->
         <div class="end-screen">
-            <h2 class="glitch" data-text="ARCHIVE SAVED">ARCHIVE SAVED</h2>
-            <p>好感度羁绊已锁定</p>
-            <p style="font-size: 0.8rem; opacity: 0.7;">Polonia OS v7.0.2 // Logged out</p>
-            <button onclick="window.history.back()">[ 断开连接 ]</button>
+            <h2 class="glitch" data-text="档案已保存">档案已保存</h2>
+            <p>好感度羁绊已永久锁定</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">普隆尼亚系统 v7.0.2 // 已登出</p>
+            <!-- 这里填你 Coze Bot 的链接，或者直接关闭 -->
+            <button onclick="window.close()">[ 断开神经连接 ]</button>
         </div>
     </div>
+
+    <!-- 简单的滚动显现脚本 -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.scene').forEach(scene => {
+            observer.observe(scene);
+        });
+    </script>
 </body>
 </html>
