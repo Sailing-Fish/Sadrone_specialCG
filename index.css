@@ -1,12 +1,12 @@
-/* 引入类似游戏中文字体 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+/* --- 0. 字体加载 (尝试多种备选方案) --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap');
 
 :root {
-    --bg-color: #050505;
-    --gold: #d4af37;
-    --red: #ff3333;
-    --blue: #00f3ff;
-    --glass: rgba(20, 20, 25, 0.9);
+    --bg-color: #080808;
+    --gold: #eebb44;  /* 更亮的金色 */
+    --red: #ff4444;    /* 更鲜艳的红 */
+    --blue: #00ffff;   /* 霓虹蓝 */
+    --glass: rgba(10, 10, 15, 0.95); /* 背景加深，防止透出后面太乱 */
 }
 
 body {
@@ -14,201 +14,250 @@ body {
     padding: 0;
     background-color: var(--bg-color);
     color: #e0e0e0;
-    font-family: "Noto Serif SC", serif; /* 使用衬线体增加文学感 */
+    /* 字体回退机制：如果谷歌字体挂了，优先用系统宋体 */
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "Songti SC", serif;
     overflow-x: hidden;
 }
 
-/* --- 1. 沉浸式特效层 --- */
+/* --- 1. 强化版特效层 (解决看不见的问题) --- */
 .noise {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    /* 噪点纹理，模拟老旧显示器 */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    /* 使用 CSS 渐变模拟噪点，不依赖外部图片链接，确保稳定 */
+    background: repeating-radial-gradient(#000 0 0.0001%, #111 0 0.0002%) 50% 0/2500px 2500px,
+                repeating-conic-gradient(#000 0 0.0001%, #111 0 0.0002%) 60% 60%/2500px 2500px;
+    background-blend-mode: difference;
+    opacity: 0.08; /* 调高不透明度 */
     pointer-events: none;
-    z-index: 99;
+    z-index: 999; /* 确保在最顶层 */
 }
 
 .scanline {
     width: 100%;
-    height: 5px;
-    z-index: 100;
-    background: rgba(0, 255, 255, 0.1);
+    height: 100vh;
     position: fixed;
-    top: 0;
-    animation: scan 8s linear infinite;
+    top: 0; left: 0;
+    /* 静态扫描线纹理 */
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+    background-size: 100% 4px;
+    z-index: 998;
     pointer-events: none;
+    opacity: 0.3; /* 显著增强扫描线 */
 }
 
-@keyframes scan {
+/* 增加一个动态扫描条 */
+.scanline::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 5px;
+    background: rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    animation: scanAnim 6s linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes scanAnim {
     0% { top: -10%; }
     100% { top: 110%; }
 }
 
-/* --- 2. HUD 侧边栏 (中文) --- */
+/* --- 2. 修正 HUD 侧边栏 (解决被遮挡/看不清) --- */
 .hud-sidebar {
     position: fixed;
-    top: 20px;
-    left: 15px;
-    z-index: 50;
-    font-family: monospace;
-    font-size: 0.75rem;
+    top: 50px;
+    left: 20px;
+    z-index: 1000; /* 最高层级 */
+    font-family: 'Courier New', monospace; /* 换成系统等宽字体，防加载失败 */
+    font-size: 12px;
     color: var(--blue);
-    border-left: 2px solid var(--blue);
-    padding-left: 10px;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(2px);
+    border-left: 3px solid var(--blue);
+    padding-left: 15px;
+    background: rgba(0, 0, 0, 0.6); /* 加个底色衬托 */
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
 }
 
-.hud-item { margin-bottom: 8px; display: flex; flex-direction: column; }
-.hud-item .label { opacity: 0.7; font-size: 0.6rem; }
-.hud-item .value { font-weight: bold; }
+.hud-item { margin-bottom: 12px; display: flex; flex-direction: column; }
+.hud-item .label { opacity: 0.8; font-size: 10px; letter-spacing: 1px; }
+.hud-item .value { font-weight: bold; font-size: 14px; text-shadow: 0 0 5px var(--blue); }
 
-.blink-red { animation: blinkRed 2s infinite; color: var(--red); }
-.color-gold { color: var(--gold); }
+.blink-red { animation: blinkRed 1s infinite; color: var(--red); text-shadow: 0 0 5px var(--red); }
+.color-gold { color: var(--gold); text-shadow: 0 0 5px var(--gold); }
 
-@keyframes blinkRed { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes blinkRed { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-/* --- 3. 序幕与排版 --- */
+/* --- 3. 序幕优化 --- */
 .intro-screen {
     height: 100vh;
     display: flex; flex-direction: column;
     justify-content: center; align-items: center;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .logo {
     color: var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-    letter-spacing: 5px;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    letter-spacing: 8px;
     font-weight: bold;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
 h1.glitch {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #fff;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px var(--red);
+    margin-bottom: 40px;
+    text-shadow: 3px 3px 0px var(--red), -2px -2px 0px var(--blue);
+    animation: glitchText 3s infinite;
 }
 
-.typewriter {
-    font-family: monospace;
-    color: var(--blue);
-    margin: 5px 0;
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
+@keyframes glitchText {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-2deg); }
+    21% { transform: skew(2deg); }
+    22% { transform: skew(0deg); }
+    100% { transform: skew(0deg); }
 }
-.delay-1 { animation-delay: 1.5s; }
 
-@keyframes fadeIn { to { opacity: 1; } }
+.scroll-indicator {
+    margin-top: 60px; opacity: 0.8;
+    animation: bounce 1.5s infinite;
+    font-size: 1rem; color: var(--blue);
+}
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(15px); } }
 
-.scroll-indicator { margin-top: 50px; opacity: 0.6; animation: bounce 2s infinite; font-size: 0.8rem; }
-@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+/* --- 4. 核心场景 (增强融合感) --- */
+.container {
+    position: relative;
+    z-index: 10; /* 保证内容在特效层之上 */
+}
 
-/* --- 4. 核心场景 (图文) --- */
 .scene {
     min-height: 100vh;
     display: flex; flex-direction: column;
     justify-content: center; align-items: center;
-    padding: 20px;
+    padding: 40px 20px;
     opacity: 0;
     transform: translateY(50px);
-    transition: all 1s ease;
+    transition: all 0.8s ease-out;
 }
 
-.scene.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+.scene.visible { opacity: 1; transform: translateY(0); }
 
-/* 状态角标 */
+/* 状态角标 - 加大加粗 */
 .status-overlay {
     position: absolute;
-    top: 10px; right: 10px;
+    top: 20px; right: 20px;
     font-family: monospace;
-    color: #888;
+    color: #fff;
     background: #000;
-    padding: 2px 8px;
-    font-size: 0.7rem;
-    border: 1px solid #333;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    border: 1px solid #555;
+    box-shadow: 0 0 10px rgba(0,0,0,0.8);
+    z-index: 5;
 }
-.status-overlay.alert { color: var(--red); border-color: var(--red); }
+.status-overlay.alert { 
+    background: var(--red); border-color: #fff; 
+    animation: shakeBox 0.5s infinite;
+}
 
-/* 图片容器 */
+@keyframes shakeBox {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(2px,2px); }
+    75% { transform: translate(-2px,-2px); }
+    100% { transform: translate(0,0); }
+}
+
+/* 图片容器 - 增强发光和投影 */
 .img-frame {
     width: 100%;
-    max-width: 600px; /* 限制图片大小，适合手机浏览 */
+    max-width: 550px; /* 稍微缩小一点，让对话框更突出 */
     position: relative;
-    border: 1px solid #333;
-    box-shadow: 0 0 40px rgba(0,0,0,0.8);
-    margin-bottom: -20px; /* 让对话框压住图片 */
+    border: 2px solid #333;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.9), 0 0 20px rgba(212, 175, 55, 0.1); /* 金色微光 */
+    margin-bottom: -40px; /* 增加重叠量 */
     z-index: 1;
+    background: #000;
 }
 
-.img-frame img { width: 100%; display: block; }
+.img-frame img { width: 100%; display: block; filter: contrast(1.1) brightness(0.9); }
 
-/* 暗角 - 增加沉浸感 */
+/* 强力暗角 */
 .vignette {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    box-shadow: inset 0 0 60px rgba(0,0,0,0.9);
+    background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 100%);
     pointer-events: none;
+    box-shadow: inset 0 0 20px rgba(0,0,0,1);
 }
 
-/* 泳装场景的故障特效 */
-.glitch-container img {
-    animation: glitchAnim 4s infinite alternate-reverse;
+/* 泳装场景故障特效 */
+.glitch-img {
+    animation: imageFlash 4s infinite;
+}
+@keyframes imageFlash {
+    0%, 90% { filter: hue-rotate(0deg) contrast(1.1); opacity: 1; }
+    92% { filter: hue-rotate(90deg) contrast(1.5) blur(2px); opacity: 0.8; transform: translateX(5px); }
+    94% { filter: hue-rotate(-90deg) contrast(1.5) blur(0px); opacity: 1; transform: translateX(-5px); }
+    100% { filter: hue-rotate(0deg) contrast(1.1); opacity: 1; }
 }
 
-@keyframes glitchAnim {
-    0% { transform: translate(0); filter: hue-rotate(0deg); }
-    2% { transform: translate(-2px, 1px); filter: hue-rotate(10deg); }
-    4% { transform: translate(1px, -1px); filter: hue-rotate(-10deg); }
-    6% { transform: translate(0); filter: hue-rotate(0deg); }
-    100% { transform: translate(0); }
-}
-
-/* --- 5. 对话框 (Galgame 核心) --- */
+/* --- 5. 对话框 (重制版) --- */
 .dialogue-box {
-    width: 90%;
-    max-width: 650px;
-    background: var(--glass);
-    border: 1px solid var(--gold);
-    border-radius: 4px;
-    padding: 20px 20px 30px 20px;
-    z-index: 2;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 95%;
+    max-width: 600px;
+    background: rgba(15, 15, 20, 0.95); /* 几乎不透明 */
+    border: 2px solid var(--gold);
+    border-radius: 2px;
+    padding: 30px 25px;
+    z-index: 10;
+    box-shadow: 0 20px 50px rgba(0,0,0,1);
     position: relative;
-    backdrop-filter: blur(5px);
+    margin-top: 20px;
+}
+
+/* 装饰性角标 */
+.dialogue-box::after {
+    content: "▼";
+    position: absolute;
+    bottom: 10px; right: 15px;
+    color: var(--gold);
+    animation: blinkRed 1s infinite;
 }
 
 .name-tag {
     position: absolute;
-    top: -12px; left: 20px;
+    top: -18px; left: 0px;
     background: var(--gold);
     color: #000;
-    padding: 2px 12px;
+    padding: 5px 20px;
     font-weight: bold;
-    font-size: 0.9rem;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    font-size: 1rem;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+    transform: skewX(-10deg);
 }
+.name-tag div { transform: skewX(10deg); } /* 修正文字倾斜 */
 
 .name-tag.system { background: var(--red); color: #fff; }
 
 .text p {
-    margin: 12px 0;
-    line-height: 1.6;
-    font-size: 1rem;
-    text-shadow: 1px 1px 2px #000;
+    margin: 15px 0;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
 }
 
-.text .note { color: #888; font-size: 0.85rem; font-style: italic; }
-.system-text p { color: var(--red); font-family: monospace; font-size: 0.9rem; }
+.system-text p { color: var(--red); font-family: monospace; font-size: 0.95rem; }
 
 /* --- 6. 结尾 --- */
 .end-screen {
-    height: 60vh;
+    height: 80vh;
     display: flex; flex-direction: column;
     justify-content: center; align-items: center;
     text-align: center;
@@ -216,13 +265,21 @@ h1.glitch {
 
 button {
     background: transparent;
-    border: 1px solid var(--gold);
+    border: 2px solid var(--gold);
     color: var(--gold);
-    padding: 12px 30px;
-    margin-top: 30px;
+    padding: 15px 50px;
+    font-size: 1.2rem;
+    margin-top: 40px;
     cursor: pointer;
     font-family: inherit;
-    transition: 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.2s;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
-button:hover { background: var(--gold); color: #000; }
+button:hover { 
+    background: var(--gold); 
+    color: #000; 
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+}
