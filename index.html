@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polonia OS | Secret Event</title>
+    <link rel="stylesheet" href="event.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部系统栏 -->
+    <div class="system-overlay">
+        <div class="top-bar">
+            <span>WARNING: PRIVATE SECTOR</span>
+            <span>SUBJECT: SANDRONE</span>
+            <span>CLEARANCE: LEVEL 7 (MAX)</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 序幕 -->
+        <div class="intro-screen">
+            <h1>核心维护协议</h1>
+            <h2>PROTOCOL: UNDRESS_AND_RECHARGE</h2>
+            <p class="blink">> 正在加载私密数据流...</p>
+            <p class="scroll-hint">↓ 向下滑动以访问 ↓</p>
+        </div>
+
+        <!-- 场景一：初入 (坐姿) -->
+        <section class="scene" id="scene-1">
+            <div class="img-frame">
+                <img src="https://s3.bmp.ovh/imgs/2026/01/06/94267599b85279cc.png" alt="Phase 1">
+            </div>
+            <div class="dialogue-box">
+                <div class="name-tag">桑多涅 (Sandrone)</div>
+                <div class="text">
+                    <p>“你来了，小白鼠。”</p>
+                    <p>“把门锁上。普隆尼亚已经被我设置为‘休眠模式’了。”</p>
+                    <p>“今天的数据采集...让我的关节有些过热。既然你获得了‘实验室驻留权’，那就过来...帮我检查一下。”</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 场景二：卸甲 (脱鞋/抬腿) -->
+        <section class="scene" id="scene-2">
+            <div class="img-frame">
+                <img src="https://s3.bmp.ovh/imgs/2026/01/06/3dbf5ca39ce5073f.png" alt="Phase 2">
+            </div>
+            <div class="dialogue-box">
+                <div class="name-tag">桑多涅 (Sandrone)</div>
+                <div class="text">
+                    <p>“别傻站着，帮我把鞋子脱了。”</p>
+                    <p>“...你的手在抖什么？只是拆卸外部装甲而已。”</p>
+                    <p>“这双腿的传动轴承有些干涩了...呵，别用那种眼神看我。这是为了维护，不是为了让你像个变态一样盯着看的。”</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 场景三：核心暴露 (泳装/幻象) -->
+        <!-- 这里设计为一种“数据解离”或“散热模式”的幻象 -->
+        <section class="scene" id="scene-3">
+            <div class="img-frame">
+                <img src="https://s3.bmp.ovh/imgs/2026/01/06/fa8afe63adf4a2a8.png" alt="Phase 3">
+                <div class="glitch-overlay"></div> <!-- 故障特效层 -->
+            </div>
+            <div class="dialogue-box special">
+                <div class="name-tag">系统提示 (SYSTEM)</div>
+                <div class="text system-text">
+                    <p>> 警告：散热系统全功率运行。</p>
+                    <p>> 检测到以太数据溢出... 正在加载【夏日海滩模拟数据】。</p>
+                </div>
+                <div class="name-tag" style="margin-top:15px">桑多涅 (Sandrone)</div>
+                <div class="text">
+                    <p>“怎么样？这是我隐藏在核心深处的...散热形态。”</p>
+                    <p>“在这个模式下，没有厚重的礼服，也没有愚人众的责任。”</p>
+                    <p>“只有你可以看到这个样子的我。如果敢说出去...我就把你做成永远闭嘴的人偶。”</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 场景四：休眠 (睡着) -->
+        <section class="scene" id="scene-4">
+            <div class="img-frame">
+                <img src="https://s3.bmp.ovh/imgs/2026/01/06/3e3d8517a2638423.png" alt="Phase 4">
+            </div>
+            <div class="dialogue-box">
+                <div class="name-tag">桑多涅 (Sandrone)</div>
+                <div class="text">
+                    <p>“嗯... 核心温度... 稳定了...”</p>
+                    <p>“别走... 就在这里待着...”</p>
+                    <p>“普隆尼亚... 不在... 你就是我的... 守卫...”</p>
+                    <p class="small-text">（呼吸变得平稳，她进入了深度待机模式。）</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 结尾 -->
+        <div class="end-screen">
+            <h2>EVENT COMPLETED</h2>
+            <p>好感度羁绊已加深</p>
+            <button onclick="window.history.back()">退出终端</button>
+        </div>
+    </div>
+</body>
+</html>
